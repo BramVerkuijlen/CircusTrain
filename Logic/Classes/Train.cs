@@ -4,20 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CircusTrain
+namespace Logic
 {
-    internal class Train
+    public class Train
     {
-        public List<Wagon> WagonList { get; set; }
-
-        public Train(List<Wagon> wagons)
-        {
-            WagonList = wagons;
-        }
-
+        public List<Wagon> WagonList { get; private set; }
+        
         public void AddWagon(Wagon wagon)
         {
             WagonList.Add(wagon);
         }
+
+
     }
 }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CircusTrain.Setup;
 
-namespace CircusTrain.Classes.Helper
+namespace Logic.Helper
 {
-    public enum AnimalSize
+    public enum Diët
     {
-        L = 5,
-        M = 3,
-        S = 1,
+        Carnivore,
+        Omnivore,
+        Herbivore
     }
 }

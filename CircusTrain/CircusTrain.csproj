@@ -12,4 +12,8 @@
     <PackageReference Include="EO.WebBrowser" Version="22.2.19" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj" />
+  </ItemGroup>
+
 </Project>

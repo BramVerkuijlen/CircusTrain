@@ -1,7 +1,8 @@
-using CircusTrain.Classes.Helper;
-using CircusTrain.Setup;
+
 using EO.WebBrowser;
 using System.ComponentModel;
+using Logic.Helper;
+using Logic;
 
 namespace CircusTrain
 {

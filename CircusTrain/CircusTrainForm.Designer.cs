@@ -137,7 +137,7 @@
             // 
             // btn_makeTrain
             // 
-            this.btn_makeTrain.Location = new System.Drawing.Point(639, 67);
+            this.btn_makeTrain.Location = new System.Drawing.Point(639, 63);
             this.btn_makeTrain.Name = "btn_makeTrain";
             this.btn_makeTrain.Size = new System.Drawing.Size(75, 23);
             this.btn_makeTrain.TabIndex = 14;

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CircusTrain.Classes.Helper
+namespace Logic.Helper
 {
-    public enum Diët
+    public enum AnimalSize
     {
-        Carnivore,
-        Omnivore,
-        Herbivore
+        L = 5,
+        M = 3,
+        S = 1,
     }
 }
