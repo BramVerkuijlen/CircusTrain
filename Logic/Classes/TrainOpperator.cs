@@ -9,33 +9,31 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
-        public Train Train { get; private set; }
-        private List<Animal> Animals { get; set; }
-
         public void StartAlgorithm(List<Animal> animals)
         {
 
         }
-        private void SortListAnimals()
+        private List<Animal> SortListAnimals(List<Animal> animals)
         {
-            for (int i = 0; i < Animals.Count - 1; i++)
+            for (int i = 0; i < animals.Count - 1; i++)
             {
-                for (int N = 0; N < Animals.Count - i; N++)
+                for (int N = 0; N < animals.Count - i; N++)
                 {
-                    if (Animals[N].Size < Animals[N + 1].Size)
+                    if (animals[N].Size < animals[N + 1].Size)
                     {
-                        Animals.Reverse(N, N + 1);
+                        animals.Reverse(N, N + 1);
                     }
 
-                    else if (Animals[N].Size == Animals[N + 1].Size)
+                    else if (animals[N].Size == animals[N + 1].Size)
                     {
-                        if (Animals[N].Diët != Diët.Carnivore && Animals[N + 1].Diët == Diët.Carnivore)
+                        if (animals[N].Diët != Diët.Carnivore && animals[N + 1].Diët == Diët.Carnivore)
                         {
-                            Animals.Reverse(N, N + 1);
+                            animals.Reverse(N, N + 1);
                         }
                     }
                 }
             }
+            return animals;
         }
 
         private void FillWagon()

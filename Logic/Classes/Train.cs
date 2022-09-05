@@ -8,11 +8,15 @@ namespace Logic
 {
     public class Train
     {
-        public List<Wagon> WagonList { get; private set; }
+        private List<Wagon> _wagonList;
+        public IEnumerable<Wagon> WagonList
+        {
+            get { return _wagonList; }
+        }
         
         public void AddWagon(Wagon wagon)
         {
-            WagonList.Add(wagon);
+            _wagonList.Add(wagon);
         }
 
 

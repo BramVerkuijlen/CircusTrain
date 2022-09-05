@@ -14,14 +14,19 @@ namespace Logic
             get
             {
                 int emptySpace = Size;
-                foreach (Animal animal in this.Animals)
+                foreach (Animal animal in this._animals)
                 {
                     emptySpace -= Convert.ToInt32(animal.Size);
                 }
                 return emptySpace;
             }
         }
-        public List<Animal> Animals { get; private set; }
+        private List<Animal> _animals;
+
+        IEnumerable<Animal> Animals
+        {
+            get { return _animals; }
+        }
 
         public Wagon()
         {
@@ -31,7 +36,7 @@ namespace Logic
         {
             if ((int) animal.Size <= EmptySpace)
             {
-                Animals.Add(animal);
+                _animals.Add(animal);
                 return true;
             }
             return false;
