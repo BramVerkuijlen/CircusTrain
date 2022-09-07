@@ -21,8 +21,8 @@ namespace Logic
                 return emptySpace;
             }
         }
-        private List<Animal> _animals;
 
+        private List<Animal> _animals;
         IEnumerable<Animal> Animals
         {
             get { return _animals; }
@@ -32,14 +32,39 @@ namespace Logic
         {
             Size = 10;
         }
+
         public bool TryAddAnimal(Animal animal)
         {
-            if ((int) animal.Size <= EmptySpace)
+            if(LookForEmptySpace(animal))
             {
-                _animals.Add(animal);
+                if(!LookForBiggerCarnivore(animal))
+                {
+                    _animals.Add(animal);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool LookForEmptySpace(Animal animal)
+        {
+            if ((int)animal.Size <= EmptySpace)
+            {
                 return true;
             }
             return false;
+        }
+
+        private bool LookForBiggerCarnivore(Animal animal)
+        {
+            foreach(Animal animal2 in this._animals)
+            {
+                if((int)animal2.Size >= (int)animal.Size && animal2.Diët == Helper.Diët.Carnivore)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

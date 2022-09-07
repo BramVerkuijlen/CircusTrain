@@ -9,10 +9,11 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
-        public void StartAlgorithm(List<Animal> animals)
+        public Train StartAlgorithm(List<Animal> animals)
         {
-
+            return AddWagonsToTrain(FillAnimalsInWagons(SortListAnimals(animals)), new Train());
         }
+
         private List<Animal> SortListAnimals(List<Animal> animals)
         {
             for (int i = 0; i < animals.Count - 1; i++)
@@ -36,17 +37,39 @@ namespace Logic.Classes
             return animals;
         }
 
-        private void FillWagon()
+        private List<Wagon> FillAnimalsInWagons(List<Animal> animals)
         {
-            Wagon wagon = new Wagon();
+            List<Wagon> wagons = new List<Wagon>();
+            wagons.Add(new Wagon());
 
+            int N = 0;
 
+            for (int i = 0; i < animals.Count;)
+            {
+                if ((int)animals[i].Size! > wagons[N].Size)
+                {
+                    if (wagons[N].TryAddAnimal(animals[i]))
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        wagons.Add(new Wagon());
+                        N++;
+                    }
+                }
+            }
 
+            return new List<Wagon>(wagons);
         }
 
-        private void AddWagonToTrain()
+        private Train AddWagonsToTrain(List<Wagon> wagons, Train train)
         {
-
+            foreach (Wagon wagon in wagons)
+            {
+                train.AddWagon(wagon);
+            }
+            return train;
         }
     }
 }
