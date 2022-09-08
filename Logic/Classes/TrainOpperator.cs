@@ -14,7 +14,8 @@ namespace Logic.Classes
 
         public Train StartAlgorithm(List<Animal> animals)
         {
-            Passive = SortAnimalsOnDiët(animals).Passive;
+            Train train = new Train();
+            return train;
         }
 
         private (List<Animal> Passive, List<Animal> Agressive) SortAnimalsOnDiët(List<Animal> animals)
