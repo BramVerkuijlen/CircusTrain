@@ -9,12 +9,33 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
+        private List<Animal> Passive;
+        private List<Animal> agressive;
+
         public Train StartAlgorithm(List<Animal> animals)
         {
-            return AddWagonsToTrain(FillAnimalsInWagons(SortListAnimals(animals)), new Train());
+            Passive = SortAnimalsOnDiët(animals).Passive;
         }
 
-        private List<Animal> SortListAnimals(List<Animal> animals)
+        private (List<Animal> Passive, List<Animal> Agressive) SortAnimalsOnDiët(List<Animal> animals)
+        {
+            List<Animal> passive = new List<Animal>();
+            List<Animal> agressive = new List<Animal>();
+
+            foreach (var animal in animals)
+            {
+                if (animal.Diët == Diët.Carnivore)
+                {
+                    passive.Add(animal);
+                }
+
+                else agressive.Add(animal);
+            }
+
+            return (passive, agressive);
+        }
+
+        private List<Animal> SortAnimalsBigToSMall(List<Animal> animals)
         {
             for (int i = 0; i < animals.Count - 1; i++)
             {
@@ -24,52 +45,47 @@ namespace Logic.Classes
                     {
                         animals.Reverse(N, N + 1);
                     }
-
-                    else if (animals[N].Size == animals[N + 1].Size)
-                    {
-                        if (animals[N].Diët != Diët.Carnivore && animals[N + 1].Diët == Diët.Carnivore)
-                        {
-                            animals.Reverse(N, N + 1);
-                        }
-                    }
                 }
             }
             return animals;
         }
 
-        private List<Wagon> FillAnimalsInWagons(List<Animal> animals)
+        private List<Wagon> GiveAnimalWagon(List<Animal> animals)
         {
             List<Wagon> wagons = new List<Wagon>();
-            wagons.Add(new Wagon());
 
-            int N = 0;
-
-            for (int i = 0; i < animals.Count;)
+            foreach (var animal in animals)
             {
-                if ((int)animals[i].Size! > wagons[N].Size)
+                Wagon wagon = new Wagon();
+                wagon.TryAddAnimal(animal);
+            }
+
+            return wagons;
+        }
+
+        private List<Wagon> DevideOverWagons(List<Wagon> wagons, List<Animal> animals)
+        {
+            foreach (var animal in animals)
+            {
+                for (int i = 0; i < wagons.Count + 1; i++)
                 {
-                    if (wagons[N].TryAddAnimal(animals[i]))
-                    {
-                        i++;
-                    }
-                    else
+                    if(i == wagons.Count)
                     {
                         wagons.Add(new Wagon());
-                        N++;
+                        wagons[i].TryAddAnimal(animal);
+                        break;
+                    }
+
+                    if(wagons[i].TryAddAnimal(animal))
+                    {
+                        wagons[i].TryAddAnimal(animal);
+                        break;
                     }
                 }
             }
 
-            return new List<Wagon>(wagons);
+            return wagons;
         }
-
-        private Train AddWagonsToTrain(List<Wagon> wagons, Train train)
-        {
-            foreach (Wagon wagon in wagons)
-            {
-                train.AddWagon(wagon);
-            }
-            return train;
-        }
+        
     }
 }
