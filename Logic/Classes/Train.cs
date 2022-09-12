@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic
+namespace Logic.Classes
 {
     public class Train
     {
-        private List<Wagon> _wagonList;
-        public IEnumerable<Wagon> WagonList
+        private List<Wagon>? _wagonList = new List<Wagon>();
+        public IEnumerable<Wagon> Wagons
         {
             get { return _wagonList; }
         }
@@ -19,6 +19,14 @@ namespace Logic
             _wagonList.Add(wagon);
         }
 
-
+        public override string ToString()
+        {
+            string result = "rain";
+            foreach (Wagon wagon in _wagonList)
+            {
+                result += ("\n" + wagon.ToString());
+            }
+            return result;
+        }
     }
 }

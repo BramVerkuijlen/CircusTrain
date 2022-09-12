@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic
+namespace Logic.Classes
 {
     public class Wagon
     {
@@ -13,17 +13,12 @@ namespace Logic
         {
             get
             {
-                int emptySpace = Size;
-                foreach (Animal animal in this._animals)
-                {
-                    emptySpace -= Convert.ToInt32(animal.Size);
-                }
-                return emptySpace;
+                    return Size - _animals.Sum(e => (int)e.Size);
             }
         }
 
-        private List<Animal> _animals;
-        IEnumerable<Animal> Animals
+        private List<Animal> _animals = new List<Animal>();
+        public IEnumerable<Animal> Animals
         {
             get { return _animals; }
         }
@@ -35,9 +30,9 @@ namespace Logic
 
         public bool TryAddAnimal(Animal animal)
         {
-            if(LookForEmptySpace(animal))
+            if (LookForEmptySpace(animal))
             {
-                if(!LookForBiggerCarnivore(animal))
+                if (!LookForDiëtConflict(animal))
                 {
                     _animals.Add(animal);
                     return true;
@@ -55,16 +50,26 @@ namespace Logic
             return false;
         }
 
-        private bool LookForBiggerCarnivore(Animal animal)
+        private bool LookForDiëtConflict(Animal newAnimal)
         {
-            foreach(Animal animal2 in this._animals)
+            foreach (Animal oldAnimal in _animals)
             {
-                if((int)animal2.Size >= (int)animal.Size && animal2.Diët == Helper.Diët.Carnivore)
+                if (oldAnimal.TryEatEachother(newAnimal))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
+        }
+
+        public override string ToString()
+        {
+            string result = "wagon";
+            foreach (Animal animal in _animals)
+            {
+                result += ("\n" + animal.ToString());
+            }
+            return result;
         }
     }
 }

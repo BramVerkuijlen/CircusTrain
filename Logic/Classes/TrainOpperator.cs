@@ -9,17 +9,32 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
-        private List<Animal> Passive;
-        private List<Animal> agressive;
-
         public Train StartAlgorithm(List<Animal> animals)
         {
             Train train = new Train();
+
+            List<Wagon> wagons = new List<Wagon>();
+
+            List<Animal> passive = new List<Animal>();
+            List<Animal> agressive = new List<Animal>();
+
+            (passive, agressive) = SortAnimalsOnDiët(animals);
+
+            passive = SortAnimalsBigToSMall(passive);
+            agressive = SortAnimalsBigToSMall(agressive);
+
+            wagons = GiveAnimalWagon(agressive);
+
+            wagons = DevideOverWagons(wagons, passive);
+
+            train = AddWagonsToTrain(train, wagons);
+
             return train;
         }
 
         private (List<Animal> Passive, List<Animal> Agressive) SortAnimalsOnDiët(List<Animal> animals)
         {
+           
             List<Animal> passive = new List<Animal>();
             List<Animal> agressive = new List<Animal>();
 
@@ -27,10 +42,10 @@ namespace Logic.Classes
             {
                 if (animal.Diët == Diët.Carnivore)
                 {
-                    passive.Add(animal);
+                    agressive.Add(animal);
                 }
 
-                else agressive.Add(animal);
+                else passive.Add(animal);
             }
 
             return (passive, agressive);
@@ -38,6 +53,10 @@ namespace Logic.Classes
 
         private List<Animal> SortAnimalsBigToSMall(List<Animal> animals)
         {
+
+            return animals.OrderByDescending(e => (int)e.Size).ToList();
+
+            /*
             for (int i = 0; i < animals.Count - 1; i++)
             {
                 for (int N = 0; N < animals.Count - i; N++)
@@ -49,6 +68,7 @@ namespace Logic.Classes
                 }
             }
             return animals;
+            */
         }
 
         private List<Wagon> GiveAnimalWagon(List<Animal> animals)
@@ -59,6 +79,7 @@ namespace Logic.Classes
             {
                 Wagon wagon = new Wagon();
                 wagon.TryAddAnimal(animal);
+                wagons.Add(wagon);
             }
 
             return wagons;
@@ -84,8 +105,16 @@ namespace Logic.Classes
                     }
                 }
             }
-
             return wagons;
+        }
+
+        private Train AddWagonsToTrain(Train train, List<Wagon> wagons)
+        {
+            foreach (var wagon in wagons)
+            {
+                train.AddWagon(wagon);
+            }
+            return train;
         }
         
     }

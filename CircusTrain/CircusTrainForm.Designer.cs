@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 588);
+            this.ClientSize = new System.Drawing.Size(997, 588);
             this.Controls.Add(this.txtbox_name);
             this.Controls.Add(this.btn_makeTrain);
             this.Controls.Add(this.lbox_train);

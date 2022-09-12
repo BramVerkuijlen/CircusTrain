@@ -3,6 +3,7 @@ using EO.WebBrowser;
 using System.ComponentModel;
 using Logic.Helper;
 using Logic;
+using Logic.Classes;
 
 namespace CircusTrain
 {
@@ -10,6 +11,8 @@ namespace CircusTrain
     {
         List<Animal> animals = new List<Animal>();
         BindingSource bindingSource = new BindingSource();
+
+        TrainOpperator TrainOpperator = new TrainOpperator();
 
         public CircusTrainInterface()
         {
@@ -27,23 +30,23 @@ namespace CircusTrain
 
         private void btn_makeTrain_Click(object sender, EventArgs e)
         {
-
+            TrainOpperator.StartAlgorithm(animals).ToString();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            AddAnimalToList(txtbox_name.Text, (Diët)lbox_diët.SelectedItem , (AnimalSize)lbox_size.SelectedItem);
+            AddAnimalToList(txtbox_name.Text, (Diët)lbox_diët.SelectedItem, (AnimalSize)lbox_size.SelectedItem);
 
             UpdateAnimalList();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            if(lbox_animals.SelectedIndex != -1)
+            if (lbox_animals.SelectedIndex != -1)
             {
                 RemoveAnimalFromList(lbox_animals.SelectedIndex);
             }
-           
+
             UpdateAnimalList();
         }
 
