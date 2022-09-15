@@ -9,7 +9,7 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
-        public Train StartAlgorithm(List<Animal> animals)
+        public Train DevideAnimalsOverTrain(List<Animal> animals)
         {
             Train train = new Train();
 
@@ -20,8 +20,8 @@ namespace Logic.Classes
 
             (passive, agressive) = SortAnimalsOnDiët(animals);
 
-            passive = SortAnimalsBigToSMall(passive);
-            agressive = SortAnimalsBigToSMall(agressive);
+            passive = SortAnimalsBigToSmall(passive);
+            agressive = SortAnimalsBigToSmall(agressive);
 
             wagons = GiveAnimalWagon(agressive);
 
@@ -51,7 +51,7 @@ namespace Logic.Classes
             return (passive, agressive);
         }
 
-        private List<Animal> SortAnimalsBigToSMall(List<Animal> animals)
+        private List<Animal> SortAnimalsBigToSmall(List<Animal> animals)
         {
 
             return animals.OrderByDescending(e => (int)e.Size).ToList();

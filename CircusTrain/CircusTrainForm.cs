@@ -30,7 +30,7 @@ namespace CircusTrain
 
         private void btn_makeTrain_Click(object sender, EventArgs e)
         {
-            TrainOpperator.StartAlgorithm(animals).ToString();
+            TrainOpperator.DevideAnimalsOverTrain(animals).ToString();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
