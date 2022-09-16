@@ -13,14 +13,17 @@ namespace Logic.Classes
         {
             get
             {
-                    return Size - _animals.Sum(e => (int)e.Size);
+                return Size - _animals.Sum(e => (int)e.Size);
             }
         }
 
         private List<Animal> _animals = new List<Animal>();
-        public IEnumerable<Animal> Animals
+        public IReadOnlyCollection<Animal> Animals
         {
-            get { return _animals; }
+            get 
+            {
+                return _animals.AsReadOnly();
+            }
         }
 
         public Wagon()
@@ -43,11 +46,7 @@ namespace Logic.Classes
 
         private bool LookForEmptySpace(Animal animal)
         {
-            if ((int)animal.Size <= EmptySpace)
-            {
-                return true;
-            }
-            return false;
+            return (int)animal.Size <= EmptySpace;
         }
 
         private bool LookForDiëtConflict(Animal newAnimal)
@@ -60,16 +59,6 @@ namespace Logic.Classes
                 }
             }
             return false;
-        }
-
-        public override string ToString()
-        {
-            string result = "wagon";
-            foreach (Animal animal in _animals)
-            {
-                result += ("\n" + animal.ToString());
-            }
-            return result;
         }
     }
 }

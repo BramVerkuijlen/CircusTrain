@@ -25,7 +25,7 @@ namespace CircusTrain
             lbox_animals.DataSource = animals;
 
             lbox_size.DataSource = System.Enum.GetValues(typeof(AnimalSize));
-            lbox_diët.DataSource = System.Enum.GetValues(typeof(Diët));
+            lbox_diët.DataSource = System.Enum.GetValues(typeof(Diet));
         }
 
         private void btn_makeTrain_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace CircusTrain
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            AddAnimalToList(txtbox_name.Text, (Diët)lbox_diët.SelectedItem, (AnimalSize)lbox_size.SelectedItem);
+            AddAnimalToList(txtbox_name.Text, (Diet)lbox_diët.SelectedItem, (AnimalSize)lbox_size.SelectedItem);
 
             UpdateAnimalList();
         }
@@ -60,7 +60,7 @@ namespace CircusTrain
         }
 
         // add function for teh animals list
-        public void AddAnimalToList(string name, Diët diët, AnimalSize animalSize)
+        public void AddAnimalToList(string name, Diet diët, AnimalSize animalSize)
         {
             Animal animal = new Animal(name, diët, animalSize);
 

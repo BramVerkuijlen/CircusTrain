@@ -8,25 +8,16 @@ namespace Logic.Classes
 {
     public class Train
     {
-        private List<Wagon>? _wagonList = new List<Wagon>();
-        public IEnumerable<Wagon> Wagons
+        private List<Wagon> _wagonList = new List<Wagon>();
+        public IReadOnlyCollection <Wagon> Wagons
         {
-            get { return _wagonList; }
+            get { return _wagonList.AsReadOnly(); }
         }
         
-        public void AddWagon(Wagon wagon)
+        public void AddWagonList(List<Wagon> Wagon)
         {
-            _wagonList.Add(wagon);
-        }
-
-        public override string ToString()
-        {
-            string result = "rain";
-            foreach (Wagon wagon in _wagonList)
-            {
-                result += ("\n" + wagon.ToString());
-            }
-            return result;
+            foreach (Wagon wagon in Wagon)
+                _wagonList.Add(wagon);
         }
     }
 }

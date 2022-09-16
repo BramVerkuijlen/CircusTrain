@@ -9,7 +9,7 @@ namespace Logic.Classes
 {
     public class TrainOpperator
     {
-        public Train DevideAnimalsOverTrain(List<Animal> animals)
+        public Train DivideAnimalsOverTrain(List<Animal> animals)
         {
             Train train = new Train();
 
@@ -23,11 +23,11 @@ namespace Logic.Classes
             passive = SortAnimalsBigToSmall(passive);
             agressive = SortAnimalsBigToSmall(agressive);
 
-            wagons = GiveAnimalWagon(agressive);
+            wagons = GiveEachAnimalAWagon(agressive);
 
             wagons = DevideOverWagons(wagons, passive);
 
-            train = AddWagonsToTrain(train, wagons);
+            train.AddWagonList(wagons);
 
             return train;
         }
@@ -40,12 +40,15 @@ namespace Logic.Classes
 
             foreach (var animal in animals)
             {
-                if (animal.Diët == Diët.Carnivore)
+                if (animal.Diet == Diet.Carnivore)
                 {
                     agressive.Add(animal);
                 }
 
-                else passive.Add(animal);
+                else
+                {
+                    passive.Add(animal);
+                }
             }
 
             return (passive, agressive);
@@ -71,7 +74,7 @@ namespace Logic.Classes
             */
         }
 
-        private List<Wagon> GiveAnimalWagon(List<Animal> animals)
+        private List<Wagon> GiveEachAnimalAWagon(List<Animal> animals)
         {
             List<Wagon> wagons = new List<Wagon>();
 
@@ -89,33 +92,24 @@ namespace Logic.Classes
         {
             foreach (var animal in animals)
             {
+                bool filledIn = false;
                 for (int i = 0; i < wagons.Count + 1; i++)
                 {
-                    if(i == wagons.Count)
+                    if (wagons[i].TryAddAnimal(animal))
                     {
-                        wagons.Add(new Wagon());
-                        wagons[i].TryAddAnimal(animal);
+                        filledIn = true;
                         break;
                     }
+                }
 
-                    if(wagons[i].TryAddAnimal(animal))
-                    {
-                        wagons[i].TryAddAnimal(animal);
-                        break;
-                    }
+                if (!filledIn)
+                {
+                    Wagon wagon = new Wagon();
+                    wagon.TryAddAnimal(animal);
+                    wagons.Add(wagon);
                 }
             }
             return wagons;
         }
-
-        private Train AddWagonsToTrain(Train train, List<Wagon> wagons)
-        {
-            foreach (var wagon in wagons)
-            {
-                train.AddWagon(wagon);
-            }
-            return train;
-        }
-        
     }
 }

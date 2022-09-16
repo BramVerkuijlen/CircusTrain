@@ -8,10 +8,14 @@ namespace UnitTests
     public class TestAnimal
     {
         [TestMethod]
-        [DataRow("cow", Diët.Herbivore, AnimalSize.M, "cow", Diët.Herbivore, AnimalSize.M)]
-        [DataRow("giraffe", Diët.Herbivore, AnimalSize.L, "Tiger", Diët.Carnivore, AnimalSize.M)]
-        [DataRow("Tiger", Diët.Carnivore, AnimalSize.M, "giraffe", Diët.Herbivore, AnimalSize.L)]
-        public void TryEatEachother_TestIfEatEachother_ReturnFalse(string Name1, Diët diët1, AnimalSize size1, string Name2, Diët diët2, AnimalSize size2)
+
+        [DataRow("cow", Diet.Herbivore, AnimalSize.M, "cow", Diet.Herbivore, AnimalSize.M, false)]
+        [DataRow("giraffe", Diet.Herbivore, AnimalSize.L, "Tiger", Diet.Carnivore, AnimalSize.M, false)]
+        [DataRow("Tiger", Diet.Carnivore, AnimalSize.M, "giraffe", Diet.Herbivore, AnimalSize.L, false)]
+        [DataRow("cow", Diet.Herbivore, AnimalSize.M, "Tiger", Diet.Carnivore, AnimalSize.M, true)]
+        [DataRow("Tiger", Diet.Carnivore, AnimalSize.M, "cow", Diet.Herbivore, AnimalSize.M, true)]
+        [DataRow("Tiger", Diet.Carnivore, AnimalSize.M, "Tiger", Diet.Carnivore, AnimalSize.M, true)]
+        public void TryEatEachother_TestIfEatEachother_ReturnFalse(string Name1, Diet diët1, AnimalSize size1, string Name2, Diet diët2, AnimalSize size2, bool expectedOutcome)
         {
             //arrange
             Animal animal1 = new Animal(Name1, diët1, size1);
@@ -23,26 +27,7 @@ namespace UnitTests
             expected = animal1.TryEatEachother(animal2);
 
             //assert
-            Assert.IsFalse(expected);
-        }
-
-        [TestMethod]
-        [DataRow("cow", Diët.Herbivore, AnimalSize.M, "Tiger", Diët.Carnivore, AnimalSize.M)]
-        [DataRow("Tiger", Diët.Carnivore, AnimalSize.M, "cow", Diët.Herbivore, AnimalSize.M)]
-        [DataRow("Tiger", Diët.Carnivore, AnimalSize.M, "Tiger", Diët.Carnivore, AnimalSize.M)]
-        public void TryEatEachother_TestIfEatEachother_ReturnTrue(string Name1, Diët diët1, AnimalSize size1, string Name2, Diët diët2, AnimalSize size2)
-        {
-            //arrange
-            Animal animal1 = new Animal(Name1, diët1, size1);
-            Animal animal2 = new Animal(Name2, diët2, size2);
-            
-            bool expected;
-
-            //act
-            expected = animal1.TryEatEachother(animal2);
-
-            //assert
-            Assert.IsTrue(expected);
+            Assert.AreEqual(expectedOutcome, expected);
         }
     }
 }

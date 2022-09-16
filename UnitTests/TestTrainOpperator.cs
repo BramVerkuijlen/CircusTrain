@@ -20,11 +20,11 @@ namespace UnitTests
 
             Train train = new Train();
 
-            Animal animal1 = new Animal("cow", Diët.Herbivore, AnimalSize.M);
-            Animal animal2 = new Animal("giraffe", Diët.Herbivore, AnimalSize.L);
-            Animal animal3 = new Animal("bunny", Diët.Herbivore, AnimalSize.S);
-            Animal animal4 = new Animal("tiger", Diët.Carnivore, AnimalSize.M);
-            Animal animal5 = new Animal("orca", Diët.Carnivore, AnimalSize.L);
+            Animal animal1 = new Animal("cow", Diet.Herbivore, AnimalSize.M);
+            Animal animal2 = new Animal("giraffe", Diet.Herbivore, AnimalSize.L);
+            Animal animal3 = new Animal("bunny", Diet.Herbivore, AnimalSize.S);
+            Animal animal4 = new Animal("tiger", Diet.Carnivore, AnimalSize.M);
+            Animal animal5 = new Animal("orca", Diet.Carnivore, AnimalSize.L);
 
             List<Animal> animals = new List<Animal>();
             animals.Add(animal1);
@@ -41,6 +41,8 @@ namespace UnitTests
             Wagon expectedWagon2 = new Wagon();
             Wagon expectedWagon3 = new Wagon();
 
+            List<Wagon> expectedWagonList = new List<Wagon>();
+
             expectedWagon1.TryAddAnimal(animal5);
 
             expectedWagon2.TryAddAnimal(animal4);
@@ -49,13 +51,15 @@ namespace UnitTests
             expectedWagon3.TryAddAnimal(animal1);
             expectedWagon3.TryAddAnimal(animal3);
 
-            expectedTrain.AddWagon(expectedWagon1);
-            expectedTrain.AddWagon(expectedWagon2);
-            expectedTrain.AddWagon(expectedWagon3);
+            expectedWagonList.Add(expectedWagon1);
+            expectedWagonList.Add(expectedWagon2);
+            expectedWagonList.Add(expectedWagon3);
+
+            expectedTrain.AddWagonList(expectedWagonList);
 
             //act
 
-            train = trainOpperator.DevideAnimalsOverTrain(animals);
+            train = trainOpperator.DivideAnimalsOverTrain(animals);
 
             //assert
 

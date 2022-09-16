@@ -8,13 +8,13 @@ namespace UnitTests
     public class TestWagon
     {
         [TestMethod]
-        [DataRow("cow", Diët.Herbivore, AnimalSize.M)]
-        [DataRow("giraffe", Diët.Herbivore, AnimalSize.L)]
-        [DataRow("bunny", Diët.Herbivore, AnimalSize.S)]
-        [DataRow("tiger", Diët.Carnivore, AnimalSize.M)]
-        [DataRow("orca", Diët.Carnivore, AnimalSize.L)]
-        [DataRow("snek", Diët.Carnivore, AnimalSize.S)]
-        public void TryAddAnimal_TryAddAnimalAndCheckIfAdded_ReturnTrue(string name, Diët diët, AnimalSize size)
+        [DataRow("cow", Diet.Herbivore, AnimalSize.M)]
+        [DataRow("giraffe", Diet.Herbivore, AnimalSize.L)]
+        [DataRow("bunny", Diet.Herbivore, AnimalSize.S)]
+        [DataRow("tiger", Diet.Carnivore, AnimalSize.M)]
+        [DataRow("orca", Diet.Carnivore, AnimalSize.L)]
+        [DataRow("snek", Diet.Carnivore, AnimalSize.S)]
+        public void TryAddAnimal_TryAddAnimalAndCheckIfAdded_ReturnTrue(string name, Diet diët, AnimalSize size)
         {
             //arrange
             Wagon wagon = new Wagon();
@@ -30,13 +30,13 @@ namespace UnitTests
             Assert.AreEqual(1, wagon.Animals.Count());
         }
 
-        [DataRow("orca", Diët.Carnivore, AnimalSize.L, "orca", Diët.Carnivore, AnimalSize.L)]
-        [DataRow("orca", Diët.Carnivore, AnimalSize.L, "sheep", Diët.Herbivore, AnimalSize.M)]
-        [DataRow("sheep", Diët.Herbivore, AnimalSize.M, "orca", Diët.Carnivore, AnimalSize.L)]
-        [DataRow("snek", Diët.Carnivore, AnimalSize.S, "snek", Diët.Carnivore, AnimalSize.S)]
-        [DataRow("wolf", Diët.Carnivore, AnimalSize.M, "wolf", Diët.Carnivore, AnimalSize.M)]
+        [DataRow("orca", Diet.Carnivore, AnimalSize.L, "orca", Diet.Carnivore, AnimalSize.L)]
+        [DataRow("orca", Diet.Carnivore, AnimalSize.L, "sheep", Diet.Herbivore, AnimalSize.M)]
+        [DataRow("sheep", Diet.Herbivore, AnimalSize.M, "orca", Diet.Carnivore, AnimalSize.L)]
+        [DataRow("snek", Diet.Carnivore, AnimalSize.S, "snek", Diet.Carnivore, AnimalSize.S)]
+        [DataRow("wolf", Diet.Carnivore, AnimalSize.M, "wolf", Diet.Carnivore, AnimalSize.M)]
         [TestMethod]
-        public void TryAddAnimal_TryAddAnimalAndCheckIfAdded_ReturnFalse(string name1, Diët diët1, AnimalSize size1, string name2, Diët diët2, AnimalSize size2)
+        public void TryAddAnimal_TryAddAnimalAndCheckIfAdded_ReturnFalse(string name1, Diet diët1, AnimalSize size1, string name2, Diet diët2, AnimalSize size2)
         {
             //arrange
             Wagon wagon = new Wagon();
@@ -54,11 +54,11 @@ namespace UnitTests
             Assert.IsFalse(expected);
         }
 
-        [DataRow("giraffe", Diët.Herbivore, AnimalSize.L, "giraffe", Diët.Herbivore, AnimalSize.L, "giraffe", Diët.Herbivore, AnimalSize.L)]
-        [DataRow("giraffe", Diët.Herbivore, AnimalSize.L, "sheep", Diët.Herbivore, AnimalSize.M, "giraffe", Diët.Herbivore, AnimalSize.L)]
-        [DataRow("sheep", Diët.Herbivore, AnimalSize.M, "giraffe", Diët.Herbivore, AnimalSize.L, "sheep", Diët.Herbivore, AnimalSize.M)]
+        [DataRow("giraffe", Diet.Herbivore, AnimalSize.L, "giraffe", Diet.Herbivore, AnimalSize.L, "giraffe", Diet.Herbivore, AnimalSize.L)]
+        [DataRow("giraffe", Diet.Herbivore, AnimalSize.L, "sheep", Diet.Herbivore, AnimalSize.M, "giraffe", Diet.Herbivore, AnimalSize.L)]
+        [DataRow("sheep", Diet.Herbivore, AnimalSize.M, "giraffe", Diet.Herbivore, AnimalSize.L, "sheep", Diet.Herbivore, AnimalSize.M)]
         [TestMethod]
-        public void TryAddAnimal_TryAddAnimalAndCheckIfAddedCartFull_Returntrue(string name1, Diët diët1, AnimalSize size1, string name2, Diët diët2, AnimalSize size2, string name3, Diët diët3, AnimalSize size3)
+        public void TryAddAnimal_TryAddAnimalAndCheckIfAddedCartFull_Returntrue(string name1, Diet diët1, AnimalSize size1, string name2, Diet diët2, AnimalSize size2, string name3, Diet diët3, AnimalSize size3)
         {
             //arrange
             Wagon wagon = new Wagon();

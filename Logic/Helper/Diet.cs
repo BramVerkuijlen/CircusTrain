@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logic.Helper
 {
-    public enum Diët
+    public enum Diet
     {
         Carnivore,
-        Omnivore,
         Herbivore
     }
 }

@@ -11,13 +11,21 @@ namespace UnitTests
         {
             //arrange
             Train train = new Train();
-            Wagon wagon = new Wagon();
+            Wagon wagon1 = new Wagon();
+            Wagon wagon2 = new Wagon();
+            Wagon wagon3 = new Wagon();
+
+            List<Wagon> wagonList = new List<Wagon>();
+
+            wagonList.Add(wagon1);
+            wagonList.Add(wagon2);
+            wagonList.Add(wagon3);
 
             //act
-            train.AddWagon(wagon);
+            train.AddWagonList(wagonList);
 
             //assert
-            Assert.AreEqual(1, train.Wagons.Count());
+            Assert.AreEqual(3, train.Wagons.Count());
         }
     }
 }
