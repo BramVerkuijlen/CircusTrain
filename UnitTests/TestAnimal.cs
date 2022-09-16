@@ -24,7 +24,7 @@ namespace UnitTests
             bool expected;
 
             //act
-            expected = animal1.TryEatEachother(animal2);
+            expected = animal1.WillEatEachother(animal2);
 
             //assert
             Assert.AreEqual(expectedOutcome, expected);

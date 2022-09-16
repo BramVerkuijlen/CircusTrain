@@ -18,21 +18,21 @@ namespace Logic.Classes
             List<Animal> passive = new List<Animal>();
             List<Animal> agressive = new List<Animal>();
 
-            (passive, agressive) = SortAnimalsOnDiët(animals);
+            (passive, agressive) = SortAnimalsOnDiet(animals);
 
             passive = SortAnimalsBigToSmall(passive);
             agressive = SortAnimalsBigToSmall(agressive);
 
             wagons = GiveEachAnimalAWagon(agressive);
 
-            wagons = DevideOverWagons(wagons, passive);
+            wagons = DevideAnimalsOverWagons(wagons, passive);
 
             train.AddWagonList(wagons);
 
             return train;
         }
 
-        private (List<Animal> Passive, List<Animal> Agressive) SortAnimalsOnDiët(List<Animal> animals)
+        private (List<Animal> Passive, List<Animal> Agressive) SortAnimalsOnDiet(List<Animal> animals)
         {
            
             List<Animal> passive = new List<Animal>();
@@ -88,11 +88,12 @@ namespace Logic.Classes
             return wagons;
         }
 
-        private List<Wagon> DevideOverWagons(List<Wagon> wagons, List<Animal> animals)
+        private List<Wagon> DevideAnimalsOverWagons(List<Wagon> wagons, List<Animal> animals)
         {
             foreach (var animal in animals)
             {
                 bool filledIn = false;
+
                 for (int i = 0; i < wagons.Count + 1; i++)
                 {
                     if (wagons[i].TryAddAnimal(animal))

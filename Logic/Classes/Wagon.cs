@@ -35,7 +35,7 @@ namespace Logic.Classes
         {
             if (LookForEmptySpace(animal))
             {
-                if (!LookForDiëtConflict(animal))
+                if (!LookForDietConflict(animal))
                 {
                     _animals.Add(animal);
                     return true;
@@ -49,11 +49,11 @@ namespace Logic.Classes
             return (int)animal.Size <= EmptySpace;
         }
 
-        private bool LookForDiëtConflict(Animal newAnimal)
+        private bool LookForDietConflict(Animal newAnimal)
         {
             foreach (Animal oldAnimal in _animals)
             {
-                if (oldAnimal.TryEatEachother(newAnimal))
+                if (oldAnimal.WillEatEachother(newAnimal))
                 {
                     return true;
                 }

@@ -26,7 +26,7 @@ namespace Logic.Classes
             return Name + "  " + Diet.ToString() + "  " + Size.ToString();
         }
 
-        public bool TryEatEachother(Animal animal)
+        public bool WillEatEachother(Animal animal)
         {
             if (this.Diet == Diet.Carnivore && (int)this.Size >= (int)animal.Size)
             {
